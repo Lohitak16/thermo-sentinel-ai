@@ -10,33 +10,155 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
+import { Route as ShellAnomaliesRouteImport } from './routes/_shell.anomalies'
+import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellIndustrialFacilitiesRouteImport } from './routes/_shell.industrial-facilities'
+import { Route as ShellLiveMonitorRouteImport } from './routes/_shell.live-monitor'
+import { Route as ShellOsmRouteImport } from './routes/_shell.osm'
+import { Route as ShellRiskAnalysisRouteImport } from './routes/_shell.risk-analysis'
+import { Route as ShellSatelliteIntelligenceRouteImport } from './routes/_shell.satellite-intelligence'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellAnomaliesRoute = ShellAnomaliesRouteImport.update({
+  id: '/anomalies',
+  path: '/anomalies',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellDashboardRoute = ShellDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellIndustrialFacilitiesRoute =
+  ShellIndustrialFacilitiesRouteImport.update({
+    id: '/industrial-facilities',
+    path: '/industrial-facilities',
+    getParentRoute: () => ShellRoute,
+  } as any)
+const ShellLiveMonitorRoute = ShellLiveMonitorRouteImport.update({
+  id: '/live-monitor',
+  path: '/live-monitor',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellOsmRoute = ShellOsmRouteImport.update({
+  id: '/osm',
+  path: '/osm',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRiskAnalysisRoute = ShellRiskAnalysisRouteImport.update({
+  id: '/risk-analysis',
+  path: '/risk-analysis',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSatelliteIntelligenceRoute =
+  ShellSatelliteIntelligenceRouteImport.update({
+    id: '/satellite-intelligence',
+    path: '/satellite-intelligence',
+    getParentRoute: () => ShellRoute,
+  } as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/anomalies': typeof ShellAnomaliesRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/industrial-facilities': typeof ShellIndustrialFacilitiesRoute
+  '/live-monitor': typeof ShellLiveMonitorRoute
+  '/osm': typeof ShellOsmRoute
+  '/risk-analysis': typeof ShellRiskAnalysisRoute
+  '/satellite-intelligence': typeof ShellSatelliteIntelligenceRoute
+  '/settings': typeof ShellSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/anomalies': typeof ShellAnomaliesRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/industrial-facilities': typeof ShellIndustrialFacilitiesRoute
+  '/live-monitor': typeof ShellLiveMonitorRoute
+  '/osm': typeof ShellOsmRoute
+  '/risk-analysis': typeof ShellRiskAnalysisRoute
+  '/satellite-intelligence': typeof ShellSatelliteIntelligenceRoute
+  '/settings': typeof ShellSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/analytics': typeof ShellAnalyticsRoute
+  '/_shell/anomalies': typeof ShellAnomaliesRoute
+  '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/industrial-facilities': typeof ShellIndustrialFacilitiesRoute
+  '/_shell/live-monitor': typeof ShellLiveMonitorRoute
+  '/_shell/osm': typeof ShellOsmRoute
+  '/_shell/risk-analysis': typeof ShellRiskAnalysisRoute
+  '/_shell/satellite-intelligence': typeof ShellSatelliteIntelligenceRoute
+  '/_shell/settings': typeof ShellSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/anomalies'
+    | '/dashboard'
+    | '/industrial-facilities'
+    | '/live-monitor'
+    | '/osm'
+    | '/risk-analysis'
+    | '/satellite-intelligence'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analytics'
+    | '/anomalies'
+    | '/dashboard'
+    | '/industrial-facilities'
+    | '/live-monitor'
+    | '/osm'
+    | '/risk-analysis'
+    | '/satellite-intelligence'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/_shell'
+    | '/_shell/analytics'
+    | '/_shell/anomalies'
+    | '/_shell/dashboard'
+    | '/_shell/industrial-facilities'
+    | '/_shell/live-monitor'
+    | '/_shell/osm'
+    | '/_shell/risk-analysis'
+    | '/_shell/satellite-intelligence'
+    | '/_shell/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +170,108 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/analytics': {
+      id: '/_shell/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof ShellAnalyticsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/anomalies': {
+      id: '/_shell/anomalies'
+      path: '/anomalies'
+      fullPath: '/anomalies'
+      preLoaderRoute: typeof ShellAnomaliesRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/dashboard': {
+      id: '/_shell/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ShellDashboardRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/industrial-facilities': {
+      id: '/_shell/industrial-facilities'
+      path: '/industrial-facilities'
+      fullPath: '/industrial-facilities'
+      preLoaderRoute: typeof ShellIndustrialFacilitiesRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/live-monitor': {
+      id: '/_shell/live-monitor'
+      path: '/live-monitor'
+      fullPath: '/live-monitor'
+      preLoaderRoute: typeof ShellLiveMonitorRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/osm': {
+      id: '/_shell/osm'
+      path: '/osm'
+      fullPath: '/osm'
+      preLoaderRoute: typeof ShellOsmRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/risk-analysis': {
+      id: '/_shell/risk-analysis'
+      path: '/risk-analysis'
+      fullPath: '/risk-analysis'
+      preLoaderRoute: typeof ShellRiskAnalysisRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/satellite-intelligence': {
+      id: '/_shell/satellite-intelligence'
+      path: '/satellite-intelligence'
+      fullPath: '/satellite-intelligence'
+      preLoaderRoute: typeof ShellSatelliteIntelligenceRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
+interface ShellRouteChildren {
+  ShellAnalyticsRoute: typeof ShellAnalyticsRoute
+  ShellAnomaliesRoute: typeof ShellAnomaliesRoute
+  ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellIndustrialFacilitiesRoute: typeof ShellIndustrialFacilitiesRoute
+  ShellLiveMonitorRoute: typeof ShellLiveMonitorRoute
+  ShellOsmRoute: typeof ShellOsmRoute
+  ShellRiskAnalysisRoute: typeof ShellRiskAnalysisRoute
+  ShellSatelliteIntelligenceRoute: typeof ShellSatelliteIntelligenceRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyticsRoute: ShellAnalyticsRoute,
+  ShellAnomaliesRoute: ShellAnomaliesRoute,
+  ShellDashboardRoute: ShellDashboardRoute,
+  ShellIndustrialFacilitiesRoute: ShellIndustrialFacilitiesRoute,
+  ShellLiveMonitorRoute: ShellLiveMonitorRoute,
+  ShellOsmRoute: ShellOsmRoute,
+  ShellRiskAnalysisRoute: ShellRiskAnalysisRoute,
+  ShellSatelliteIntelligenceRoute: ShellSatelliteIntelligenceRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
